@@ -1,8 +1,8 @@
 [project]
-name = "open-webui"
-description = "Open WebUI"
+name = "lahuta"
+description = "Lahuta - Ndërfajë e Avancuar e Inteligjencës Artificiale në Gjuhën Shqipe"
 authors = [
-    { name = "Timothy Jaeryang Baek", email = "tim@openwebui.com" }
+    { name = "Lahuta Team", email = "info@lahuta.al" }
 ]
 license = { file = "LICENSE" }
 dependencies = [
@@ -161,6 +161,7 @@ all = [
 ]
 
 [project.scripts]
+lahuta = "open_webui:app"
 open-webui = "open_webui:app"
 
 [build-system]

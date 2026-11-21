@@ -9,15 +9,15 @@ services:
     restart: unless-stopped
     image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
 
-  open-webui:
+  lahuta-ui:
     build:
       context: ./ # Ensure this points to your UI source code
       dockerfile: Dockerfile
     # Tagging it locally prevents accidental pulls from overriding your build
-    image: local-open-webui:custom 
-    container_name: open-webui
+    image: local-lahuta-ui:custom 
+    container_name: lahuta-ui
     volumes:
-      - open-webui:/app/backend/data
+      - lahuta-ui:/app/backend/data
     depends_on:
       - ollama
     ports:
@@ -31,4 +31,4 @@ services:
 
 volumes:
   ollama: {}
-  open-webui: {}
+  lahuta-ui: {}

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-image_name="open-webui"
-container_name="open-webui"
+image_name="lahuta-ui"
+container_name="lahuta-ui"
 host_port=3000
 container_port=8080
 

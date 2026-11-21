@@ -1,5 +1,6 @@
 {
-	"name": "open-webui",
+	"name": "lahuta",
+	"description": "Lahuta - Ndërfaqe e Avancuar e Inteligjencës Artificiale në Gjuhën Shqipe",
 	"version": "0.7.2",
 	"private": true,
 	"scripts": {
