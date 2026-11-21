@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { getContext, onMount, tick } from 'svelte';
 	import { toast } from 'svelte-sonner';
 	import { config, models, settings, user } from '$lib/stores';
@@ -424,12 +424,12 @@
 			keywords: [
 				'about app',
 				'about me',
-				'about open webui',
+				'about lahuta',
 				'about page',
 				'about us',
 				'aboutapp',
 				'aboutme',
-				'aboutopenwebui',
+				'aboutlahuta',
 				'aboutpage',
 				'aboutus',
 				'check for updates',

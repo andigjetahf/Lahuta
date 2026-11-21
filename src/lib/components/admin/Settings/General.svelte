@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import DOMPurify from 'dompurify';
 
 	import { getVersionUpdates, getWebhookUrl, updateWebhookUrl } from '$lib/apis';
@@ -190,7 +190,7 @@
 									{$i18n.t('Help')}
 								</div>
 								<div class=" text-xs text-gray-500">
-									{$i18n.t('Discover how to use Open WebUI and seek support from the community.')}
+									{$i18n.t('Discover how to use Lahuta and seek support from the community.')}
 								</div>
 							</div>
 
