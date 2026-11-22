@@ -1,9 +1,5 @@
 [
 	{
-		"code": "sq-AL",
-		"title": "Shqip (Albanian)"
-	},
-	{
 		"code": "en-US",
 		"title": "English (US)"
 	},
@@ -18,6 +14,10 @@
 	{
 		"code": "ar-BH",
 		"title": "Arabic (Bahrain)"
+	},
+	{
+		"code": "az-AZ",
+		"title": "Azərbaycanca"
 	},
 	{
 		"code": "eu-ES",
@@ -70,6 +70,10 @@
 	{
 		"code": "fi-FI",
 		"title": "Finnish (Suomalainen)"
+	},
+	{
+		"code": "fo-FO",
+		"title": "Faroese (Faroe Islands)"
 	},
 	{
 		"code": "fr-CA",
@@ -136,6 +140,10 @@
 		"title": "Lithuanian (Lietuvių)"
 	},
 	{
+		"code": "lv-LV",
+		"title": "Latvian (Latviešu)"
+	},
+	{
 		"code": "ms-MY",
 		"title": "Malay (Bahasa Malaysia)"
 	},
@@ -180,12 +188,24 @@
 		"title": "Slovak (Slovenčina)"
 	},
 	{
+		"code": "sl-SI",
+		"title": "Slovenian (Slovenščina)"
+	},
+	{
 		"code": "es-ES",
 		"title": "Spanish (Español)"
 	},
 	{
 		"code": "sv-SE",
 		"title": "Swedish (Svenska)"
+	},
+	{
+		"code": "fil-PH",
+		"title": "Tagalog (Filipino)"
+	},
+	{
+		"code": "ta-IN",
+		"title": "தமிழ் (இந்தியா)"
 	},
 	{
 		"code": "th-TH",
