@@ -1,35 +1,45 @@
 <script lang="ts">
 	import hljs from 'highlight.js';
+	import { highlightCodeBlock } from '$lib/utils/codeHighlight';
 	import { toast } from 'svelte-sonner';
 	import { getContext, onMount, tick, onDestroy } from 'svelte';
-	import { config } from '$lib/stores';
+	import type { Writable } from 'svelte/store';
+	import type { i18n as i18nType } from 'i18next';
+	import { config, pyodideWorker as pyodideWorkerStore, visibleControls } from '$lib/stores';
 
-	import PyodideWorker from '$lib/workers/pyodide.worker?worker';
+	import { createPyodideWorker } from '$lib/pyodide/createPyodideWorker';
 	import { executeCode } from '$lib/apis/utils';
 	import {
 		copyToClipboard,
 		initMermaid,
 		renderMermaidDiagram,
-		renderVegaVisualization
+		renderVegaVisualization,
+		unescapeHtml
 	} from '$lib/utils';
 
 	import 'highlight.js/styles/github-dark.min.css';
+	import equal from 'fast-deep-equal';
 
 	import CodeEditor from '$lib/components/common/CodeEditor.svelte';
+	import DiffBlock from './DiffBlock.svelte';
 	import SvgPanZoom from '$lib/components/common/SVGPanZoom.svelte';
 
 	import ChevronUp from '$lib/components/icons/ChevronUp.svelte';
 	import ChevronUpDown from '$lib/components/icons/ChevronUpDown.svelte';
 	import CommandLine from '$lib/components/icons/CommandLine.svelte';
 	import Cube from '$lib/components/icons/Cube.svelte';
+	import Tooltip from '$lib/components/common/Tooltip.svelte';
 
-	const i18n = getContext('i18n');
+	const i18n = getContext<Writable<i18nType>>('i18n');
+	const markdown = getContext<{ allowRemoteContent: boolean; document?: boolean } | undefined>(
+		'markdown'
+	);
 
 	export let id = '';
 	export let edit = true;
 
 	export let onSave = (e) => {};
-	export let onUpdate = (e) => {};
+	export let onUpdate = (e, codeBlockId = '') => {};
 	export let onPreview = (e) => {};
 
 	export let save = false;
@@ -46,23 +56,31 @@
 	export let editorClassName = '';
 	export let stickyButtonsClassName = 'top-0';
 
-	let pyodideWorker = null;
+	let localPyodideWorker = null;
 
 	let _code = '';
-	$: if (code) {
-		updateCode();
-	}
-
-	const updateCode = () => {
-		_code = code;
-	};
+	$: _code = code;
+	$: isDiff = ['diff', 'patch'].includes(lang.trim().toLowerCase());
+	let editingDiff = false;
 
 	let _token = null;
 
 	let renderHTML = null;
-	let renderError = null;
+	let renderError: { type: 'diagram' | 'visualization'; detail: string } | null = null;
 
-	let highlightedCode = null;
+	let highlightedCode: string | null = null;
+	let highlightGeneration = 0;
+	async function highlightDocument(code: string, language: string) {
+		const generation = ++highlightGeneration;
+		highlightedCode = null;
+		try {
+			const html = await highlightCodeBlock(code, language);
+			if (generation === highlightGeneration) highlightedCode = html;
+		} catch {
+			// Keep the escaped source visible if a grammar cannot be loaded.
+		}
+	}
+	$: if (markdown?.document && !edit && !isDiff) void highlightDocument(code, lang);
 	let executing = false;
 
 	let stdout = null;
@@ -140,6 +158,7 @@
 		result = null;
 		stdout = null;
 		stderr = null;
+		files = null;
 
 		executing = true;
 
@@ -231,32 +250,51 @@
 			/\bimport\s+seaborn\b|\bfrom\s+seaborn\b/.test(code) ? 'seaborn' : null,
 			/\bimport\s+sympy\b|\bfrom\s+sympy\b/.test(code) ? 'sympy' : null,
 			/\bimport\s+tiktoken\b|\bfrom\s+tiktoken\b/.test(code) ? 'tiktoken' : null,
-			/\bimport\s+pytz\b|\bfrom\s+pytz\b/.test(code) ? 'pytz' : null
+			/\bimport\s+pytz\b|\bfrom\s+pytz\b/.test(code) ? 'pytz' : null,
+			/\bimport\s+openpyxl\b|\bfrom\s+openpyxl\b/.test(code) ? 'openpyxl' : null,
+			/\.(read|to)_excel\(|\.Excel(Writer|File)\(/.test(code) ? 'openpyxl' : null,
+			/\bimport\s+pptx\b|\bfrom\s+pptx\b/.test(code) ? 'python-pptx' : null,
+			/\bimport\s+docx\b|\bfrom\s+docx\b/.test(code) ? 'python-docx' : null
 		].filter(Boolean);
 
 		console.log(packages);
 
-		pyodideWorker = new PyodideWorker();
+		// Reuse the shared Pyodide worker when code interpreter is active,
+		// so files written here are immediately visible in PyodideFileNav.
+		// Otherwise fall back to a throwaway worker.
+		const sharedWorker = $pyodideWorkerStore;
+		const isShared = !!sharedWorker;
+		const worker = sharedWorker ?? createPyodideWorker();
 
-		pyodideWorker.postMessage({
+		if (!isShared) {
+			localPyodideWorker = worker;
+		}
+
+		worker.postMessage({
 			id: id,
 			code: code,
 			packages: packages
 		});
 
-		setTimeout(() => {
+		const timeoutId = setTimeout(() => {
 			if (executing) {
 				executing = false;
 				stderr = 'Execution Time Limit Exceeded';
-				pyodideWorker.terminate();
+				if (!isShared) {
+					worker.terminate();
+					localPyodideWorker = null;
+				}
 			}
 		}, 60000);
 
-		pyodideWorker.onmessage = (event) => {
-			console.log('pyodideWorker.onmessage', event);
-			const { id, ...data } = event.data;
+		const handler = (event) => {
+			// Ignore messages from other requests on the shared worker
+			if (event.data?.id !== id) return;
 
-			console.log(id, data);
+			console.log('pyodideWorker.onmessage', event);
+			const { id: _id, ...data } = event.data;
+
+			console.log(_id, data);
 
 			if (data['stdout']) {
 				stdout = data['stdout'];
@@ -287,7 +325,7 @@
 				}
 			}
 
-			if (data['result']) {
+			if (typeof data['result'] === 'string') {
 				result = data['result'];
 				const resultLines = result.split('\n');
 
@@ -319,11 +357,20 @@
 			data['stderr'] && (stderr = data['stderr']);
 			data['result'] && (result = data['result']);
 
+			clearTimeout(timeoutId);
+			worker.removeEventListener('message', handler);
 			executing = false;
+
+			// Signal PyodideFileNav to auto-refresh after execution
+			window.dispatchEvent(new Event('pyodide:files'));
 		};
 
-		pyodideWorker.onerror = (event) => {
+		worker.addEventListener('message', handler);
+
+		worker.onerror = (event) => {
 			console.log('pyodideWorker.onerror', event);
+			clearTimeout(timeoutId);
+			worker.removeEventListener('message', handler);
 			executing = false;
 		};
 	};
@@ -337,33 +384,39 @@
 	};
 
 	const render = async () => {
-		onUpdate(token);
-		if (lang === 'mermaid' && (token?.raw ?? '').slice(-4).includes('```')) {
+		onUpdate(token, id);
+		if (markdown?.allowRemoteContent === false) return;
+		if (
+			lang === 'mermaid' &&
+			(markdown?.document || (token?.raw ?? '').slice(-4).includes('```'))
+		) {
 			try {
 				renderHTML = await renderMermaid(code);
 			} catch (error) {
 				console.error('Failed to render mermaid diagram:', error);
 				const errorMsg = error instanceof Error ? error.message : String(error);
-				renderError = $i18n.t('Failed to render diagram') + `: ${errorMsg}`;
+				renderError = { type: 'diagram', detail: errorMsg };
 				renderHTML = null;
 			}
 		} else if (
 			(lang === 'vega' || lang === 'vega-lite') &&
-			(token?.raw ?? '').slice(-4).includes('```')
+			(markdown?.document || (token?.raw ?? '').slice(-4).includes('```'))
 		) {
 			try {
-				renderHTML = await renderVegaVisualization(code);
+				renderHTML = await renderVegaVisualization(code, lang);
 			} catch (error) {
 				console.error('Failed to render Vega visualization:', error);
 				const errorMsg = error instanceof Error ? error.message : String(error);
-				renderError = $i18n.t('Failed to render visualization') + `: ${errorMsg}`;
+				renderError = { type: 'visualization', detail: errorMsg };
 				renderHTML = null;
 			}
 		}
 	};
 
 	$: if (token) {
-		if (JSON.stringify(token) !== JSON.stringify(_token)) {
+		if (token.text !== _token?.text || token.raw !== _token?.raw) {
+			_token = token;
+		} else if (!equal(token, _token)) {
 			_token = token;
 		}
 	}
@@ -378,21 +431,8 @@
 
 	const onAttributesUpdate = () => {
 		if (attributes?.output) {
-			// Create a helper function to unescape HTML entities
-			const unescapeHtml = (html) => {
-				const textArea = document.createElement('textarea');
-				textArea.innerHTML = html;
-				return textArea.value;
-			};
-
 			try {
-				// Unescape the HTML-encoded string
-				const unescapedOutput = unescapeHtml(attributes.output);
-
-				// Parse the unescaped string into JSON
-				const output = JSON.parse(unescapedOutput);
-
-				// Assign the parsed values to variables
+				const output = JSON.parse(unescapeHtml(attributes.output));
 				stdout = output.stdout;
 				stderr = output.stderr;
 				result = output.result;
@@ -404,26 +444,28 @@
 
 	onMount(async () => {
 		if (token) {
-			onUpdate(token);
+			onUpdate(token, id);
 		}
 	});
 
 	onDestroy(() => {
-		if (pyodideWorker) {
-			pyodideWorker.terminate();
+		highlightGeneration++;
+		if (localPyodideWorker) {
+			localPyodideWorker.terminate();
+			localPyodideWorker = null;
 		}
 	});
 </script>
 
 <div>
 	<div
-		class="relative {className} flex flex-col rounded-3xl border border-gray-100/30 dark:border-gray-850/30 my-0.5"
+		class="relative {className} flex flex-col rounded-2xl border border-gray-100/30 dark:border-gray-850/30 my-0.5 overflow-clip"
 		dir="ltr"
 	>
-		{#if ['mermaid', 'vega', 'vega-lite'].includes(lang)}
+		{#if markdown?.allowRemoteContent !== false && ['mermaid', 'vega', 'vega-lite'].includes(lang)}
 			{#if renderHTML}
 				<SvgPanZoom
-					className=" rounded-3xl max-h-fit overflow-hidden"
+					className=" rounded-2xl max-h-fit overflow-hidden"
 					svg={renderHTML}
 					content={_token.text}
 				/>
@@ -433,7 +475,9 @@
 						<div
 							class="flex gap-2.5 border px-4 py-3 border-red-600/10 bg-red-600/10 rounded-2xl mb-2"
 						>
-							{renderError}
+							{renderError.type === 'diagram'
+								? $i18n.t('Failed to render diagram')
+								: $i18n.t('Failed to render visualization')}: {renderError.detail}
 						</div>
 					{/if}
 					<pre>{code}</pre>
@@ -441,17 +485,31 @@
 			{/if}
 		{:else}
 			<div
-				class="absolute left-0 right-0 py-2.5 pr-3 text-text-300 pl-4.5 text-xs font-medium dark:text-white"
+				class="sticky {stickyButtonsClassName} left-0 right-0 py-0.5 px-3.5 gap-2 flex items-center justify-end w-full z-10 text-xs text-black dark:text-white bg-white dark:bg-black"
 			>
-				{lang}
-			</div>
+				<div class="flex-1 truncate">
+					<Tooltip content={lang} placement="top-start">
+						<span class=" truncate text-ellipsis">
+							{lang}
+						</span>
+					</Tooltip>
+				</div>
 
-			<div
-				class="sticky {stickyButtonsClassName} left-0 right-0 py-2 pr-3 flex items-center justify-end w-full z-10 text-xs text-black dark:text-white"
-			>
-				<div class="flex items-center gap-0.5">
+				<div class="flex max-w-full items-center gap-0.5 shrink-0 overflow-x-auto">
+					{#if isDiff && edit}
+						<button
+							class="flex h-6 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-100/40 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-white/5"
+							aria-pressed={editingDiff}
+							on:click={() => {
+								editingDiff = !editingDiff;
+								collapsed = false;
+							}}
+						>
+							{editingDiff ? $i18n.t('Done') : $i18n.t('Edit')}
+						</button>
+					{/if}
 					<button
-						class="flex gap-1 items-center bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+						class="flex h-6 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-100/40 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-white/5"
 						on:click={collapseCodeBlock}
 					>
 						<div class=" -translate-y-[0.5px]">
@@ -466,13 +524,13 @@
 					{#if ($config?.features?.enable_code_execution ?? true) && (lang.toLowerCase() === 'python' || lang.toLowerCase() === 'py' || (lang === '' && checkPythonCode(code)))}
 						{#if executing}
 							<div
-								class="run-code-button bg-none border-none p-0.5 cursor-not-allowed bg-white dark:bg-black"
+								class="run-code-button flex h-6 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-100/40 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-white/5 cursor-not-allowed opacity-60"
 							>
 								{$i18n.t('Running')}
 							</div>
-						{:else if run}
+						{:else if run && markdown?.allowRemoteContent !== false}
 							<button
-								class="flex gap-1 items-center run-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+								class="run-code-button flex h-6 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-100/40 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-white/5"
 								on:click={async () => {
 									code = _code;
 									await tick();
@@ -488,7 +546,7 @@
 
 					{#if save}
 						<button
-							class="save-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+							class="save-code-button flex h-6 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-100/40 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-white/5"
 							on:click={saveCode}
 						>
 							{saved ? $i18n.t('Saved') : $i18n.t('Save')}
@@ -496,13 +554,13 @@
 					{/if}
 
 					<button
-						class="copy-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+						class="copy-code-button flex h-6 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-100/40 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-white/5"
 						on:click={copyCode}>{copied ? $i18n.t('Copied') : $i18n.t('Copy')}</button
 					>
 
-					{#if preview && ['html', 'svg'].includes(lang)}
+					{#if preview && ['html', 'svg'].includes(lang) && $visibleControls['chat.code_preview']}
 						<button
-							class="flex gap-1 items-center run-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+							class="run-code-button flex h-6 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-normal text-gray-600 transition-colors duration-100 hover:bg-gray-100/40 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-white/5"
 							on:click={previewCode}
 						>
 							<div>
@@ -514,19 +572,23 @@
 			</div>
 
 			<div
-				class="language-{lang} rounded-t-3xl -mt-9 {editorClassName
+				class="language-{lang} rounded-t-2xl -mt-8 {editorClassName
 					? editorClassName
 					: executing || stdout || stderr || result
 						? ''
-						: 'rounded-b-3xl'} overflow-hidden"
+						: 'rounded-b-2xl'} overflow-hidden"
 			>
-				<div class=" pt-8 bg-white dark:bg-black"></div>
+				<div class=" pt-6.5 bg-white dark:bg-black"></div>
 
 				{#if !collapsed}
-					{#if edit}
+					{#if isDiff && !(edit && editingDiff)}
+						<DiffBlock code={_code} />
+					{:else if edit || markdown?.allowRemoteContent === false}
 						<CodeEditor
-							value={code}
+							value={_code}
+							readOnly={!edit}
 							{id}
+							ariaLabel={$i18n.t('Code Editor')}
 							{lang}
 							onSave={() => {
 								saveCode();
@@ -535,6 +597,14 @@
 								_code = value;
 							}}
 						/>
+					{:else if markdown?.document}
+						<div class="document-code">
+							{#if highlightedCode}
+								{@html highlightedCode}
+							{:else}
+								<pre><code>{code}</code></pre>
+							{/if}
+						</div>
 					{:else}
 						<pre
 							class=" hljs p-4 px-5 overflow-x-auto"
@@ -544,17 +614,19 @@
 								result) &&
 								'border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;'}"><code
 								class="language-{lang} rounded-t-none whitespace-pre text-sm"
-								>{@html hljs.highlightAuto(code, hljs.getLanguage(lang)?.aliases).value ||
-									code}</code
+								>{#if lang && hljs.getLanguage(lang)}{@html hljs.highlight(code, {
+										language: lang,
+										ignoreIllegals: true
+									}).value}{:else}{code}{/if}</code
 							></pre>
 					{/if}
 				{:else}
 					<div
-						class="bg-white dark:bg-black dark:text-white rounded-b-3xl! pt-0.5 pb-3 px-4 flex flex-col gap-2 text-xs"
+						class="bg-white dark:bg-black dark:text-white rounded-b-2xl! pt-1 pb-2 px-4 flex flex-col gap-2 text-xs"
 					>
 						<span class="text-gray-500 italic">
 							{$i18n.t('{{COUNT}} hidden lines', {
-								COUNT: code.split('\n').length
+								COUNT: (isDiff ? _code : code).split('\n').length
 							})}
 						</span>
 					</div>
@@ -569,29 +641,29 @@
 
 				{#if executing || stdout || stderr || result || files}
 					<div
-						class="bg-gray-50 dark:bg-black dark:text-white rounded-b-3xl! py-4 px-4 flex flex-col gap-2"
+						class="bg-gray-50 dark:bg-black dark:text-white rounded-b-2xl! pt-2 pb-3 px-3.5 flex flex-col gap-2"
 					>
 						{#if executing}
 							<div class=" ">
-								<div class=" text-gray-500 text-sm mb-1">{$i18n.t('STDOUT/STDERR')}</div>
+								<div class=" text-gray-500 text-xs mb-1">{$i18n.t('STDOUT/STDERR')}</div>
 								<div class="text-sm">{$i18n.t('Running...')}</div>
 							</div>
 						{:else}
 							{#if stdout || stderr}
 								<div class=" ">
-									<div class=" text-gray-500 text-sm mb-1">{$i18n.t('STDOUT/STDERR')}</div>
+									<div class=" text-gray-500 text-xs mb-1">{$i18n.t('STDOUT/STDERR')}</div>
 									<div
 										class="text-sm font-mono whitespace-pre-wrap {stdout?.split('\n')?.length > 100
 											? `max-h-96`
 											: ''}  overflow-y-auto"
 									>
-										{stdout || stderr}
+										{`${stdout ?? ''}${stderr ?? ''}`}
 									</div>
 								</div>
 							{/if}
 							{#if result || files}
 								<div class=" ">
-									<div class=" text-gray-500 text-sm mb-1">{$i18n.t('RESULT')}</div>
+									<div class=" text-gray-500 text-xs mb-1">{$i18n.t('RESULT')}</div>
 									{#if result}
 										<div class="text-sm">{`${JSON.stringify(result)}`}</div>
 									{/if}
@@ -613,3 +685,26 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+	.document-code :global(pre) {
+		margin: 0;
+		padding: 0.75rem 1rem;
+		overflow-x: auto;
+		font-size: 0.8125rem;
+		line-height: normal;
+		background: transparent !important;
+	}
+	.document-code :global(code) {
+		font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+		font-size: inherit;
+		white-space: pre;
+	}
+	:global(.dark) .document-code :global(.shiki),
+	:global(.dark) .document-code :global(.shiki span) {
+		color: var(--shiki-dark) !important;
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
+</style>
