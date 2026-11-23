@@ -22,7 +22,7 @@ Me motor të integruar për **RAG (Retrieval Augmented Generation)**, kërkim n�
 
 ## ✨ Veçoritë Kryesore të Lahuta
 
-- 🇦🇱 **Lokalizim 100% në Gjuhën Shqipe**: E gjithë ndërfaqja, menutë, njoftimet dhe cilësimet janë të parazgjedhura në shqip (`sq-AL`), me përshtatje gjuhësore me cilësi të lartë.
+- 🇦🇱 **Lokalizim 100% në Gjuhën Shqipe**: E gjithë ndërfaqja, menytë, njoftimet dhe cilësimet janë të parazgjedhura në shqip (`sq-AL`), me përshtatje gjuhësore me cilësi të lartë.
 - 🚀 **Instalim i Thjeshtë me Docker**: Nisje e menjëhershme përmes Docker ose Docker Compose me mbështetje për GPU (Nvidia CUDA) dhe CPU.
 - 🤝 **Integrim i Gjithanshëm me Modelet LLM**: Lidhuni lehtësisht me serverin lokal të **Ollama**, ose integroni shërbime si **OpenAI**, **Anthropic**, **Gemini**, **Groq**, **Mistral**, **OpenRouter**, **LMStudio** dhe të tjera.
 - 📚 **RAG Lokal i Avancuar**: Ngarkoni dokumente (PDF, Word, Excel, tekst) drejtpërdrejt në bisedë me komandën `#`. Mbështet 9 baza të dhënash vektoriale (ChromaDB, PGVector, Qdrant, Milvus, Elasticsearch, etj.).
@@ -39,7 +39,7 @@ Me motor të integruar për **RAG (Retrieval Augmented Generation)**, kërkim n�
 
 ## 🚀 Si të Instaloni Lahuta
 
-### Opsioni 1: Me Docker Compose (E Rekanduar)
+### Opsioni 1: Me Docker Compose (E Rekomanduar)
 
 Kloni depon dhe nisni shërbimet me Docker Compose:
 

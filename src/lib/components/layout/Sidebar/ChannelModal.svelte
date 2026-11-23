@@ -1,19 +1,22 @@
 <script lang="ts">
 	import { getContext, createEventDispatcher, onMount } from 'svelte';
-	const i18n = getContext('i18n');
+	const i18n = getContext<any>('i18n');
 
 	import { toast } from 'svelte-sonner';
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { closePageTabs } from '$lib/stores/chatViewStates';
 
-	import { createNewChannel, deleteChannelById } from '$lib/apis/channels';
+	import {
+		createNewChannel,
+		deleteChannelById,
+		updateChannelAccessGrants
+	} from '$lib/apis/channels';
 	import { user } from '$lib/stores';
 
 	import Spinner from '$lib/components/common/Spinner.svelte';
 	import Modal from '$lib/components/common/Modal.svelte';
 	import AccessControl from '$lib/components/workspace/common/AccessControl.svelte';
 	import DeleteConfirmDialog from '$lib/components/common/ConfirmDialog.svelte';
-	import XMark from '$lib/components/icons/XMark.svelte';
+	import XMark from './icons/XMark.svelte';
 	import MemberSelector from '$lib/components/workspace/common/MemberSelector.svelte';
 	import Visibility from '$lib/components/workspace/common/Visibility.svelte';
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
@@ -23,7 +26,7 @@
 	export let onSubmit: Function = () => {};
 	export let onUpdate: Function = () => {};
 
-	export let channel = null;
+	export let channel: any = null;
 	export let edit = false;
 
 	let channelTypes = ['group', 'dm'];
@@ -31,7 +34,7 @@
 	let name = '';
 
 	let isPrivate = null;
-	let accessControl = {};
+	let accessGrants: any[] = [];
 
 	let groupIds = [];
 	let userIds = [];
@@ -55,6 +58,7 @@
 	};
 
 	const submitHandler = async () => {
+		if (loading) return;
 		loading = true;
 		if (name.length > 128) {
 			toast.error($i18n.t('Channel name must be less than 128 characters'));
@@ -65,8 +69,8 @@
 		await onSubmit({
 			type: type,
 			name: name.replace(/\s/g, '-'),
-			is_private: type === 'group' ? isPrivate : null,
-			access_control: type === '' ? accessControl : {},
+			is_private: type === 'group' ? (isPrivate ?? true) : null,
+			...(!edit ? { access_grants: type === '' ? accessGrants : [] } : {}),
 			group_ids: groupIds,
 			user_ids: userIds
 		});
@@ -85,8 +89,12 @@
 
 		if (channel) {
 			name = channel?.name ?? '';
-			isPrivate = channel?.is_private ?? null;
-			accessControl = channel.access_control;
+			if (type === 'group') {
+				isPrivate = typeof channel?.is_private === 'boolean' ? channel.is_private : true;
+			} else {
+				isPrivate = null;
+			}
+			accessGrants = structuredClone(channel?.access_grants ?? []);
 			userIds = channel?.user_ids ?? [];
 		}
 	};
@@ -102,8 +110,14 @@
 
 	const deleteHandler = async () => {
 		showDeleteConfirmDialog = false;
+		if (!channel?.id) {
+			show = false;
+			return;
+		}
 
-		const res = await deleteChannelById(localStorage.token, channel.id).catch((error) => {
+		const channelId = channel.id;
+
+		const res = await deleteChannelById(localStorage.token, channelId).catch((error) => {
 			toast.error(error.message);
 		});
 
@@ -111,9 +125,7 @@
 			toast.success($i18n.t('Channel deleted successfully'));
 			onUpdate();
 
-			if ($page.url.pathname === `/channels/${channel.id}`) {
-				goto('/');
-			}
+			closePageTabs(`/channels/${channelId}`);
 		}
 
 		show = false;
@@ -122,16 +134,15 @@
 	const resetHandler = () => {
 		type = '';
 		name = '';
-		accessControl = {};
+		accessGrants = [];
 		userIds = [];
-		loading = false;
 	};
 </script>
 
-<Modal size="md" bind:show>
+<Modal ariaLabel={edit ? $i18n.t('Edit Channel') : $i18n.t('Create Channel')} size="md" bind:show>
 	<div>
-		<div class=" flex justify-between dark:text-gray-300 px-5 pt-4 pb-1">
-			<div class=" text-lg font-medium self-center">
+		<div class=" flex justify-between dark:text-gray-300 px-4 pt-3 pb-1">
+			<div class=" text-sm self-center">
 				{#if edit}
 					{$i18n.t('Edit Channel')}
 				{:else}
@@ -139,16 +150,17 @@
 				{/if}
 			</div>
 			<button
-				class="self-center"
+				aria-label={$i18n.t('Close')}
+				class="self-center rounded-lg py-1 text-gray-500 transition hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 px-0"
 				on:click={() => {
 					show = false;
 				}}
 			>
-				<XMark className={'size-5'} />
+				<XMark className={'size-4'} />
 			</button>
 		</div>
 
-		<div class="flex flex-col md:flex-row w-full px-5 pb-4 md:space-x-4 dark:text-gray-200">
+		<div class="flex flex-col md:flex-row w-full px-4 pb-4 md:space-x-4 dark:text-gray-200">
 			<div class=" flex flex-col w-full sm:flex-row sm:justify-center sm:space-x-6">
 				<form
 					class="flex flex-col w-full"
@@ -158,7 +170,9 @@
 				>
 					{#if !edit}
 						<div class="flex flex-col w-full mt-2 mb-1">
-							<div class=" mb-1 text-xs text-gray-500">{$i18n.t('Channel Type')}</div>
+							<label for="channel-type" class="block mb-1 text-xs text-gray-500"
+								>{$i18n.t('Channel Type')}</label
+							>
 
 							<div class="flex-1">
 								<Tooltip
@@ -172,6 +186,7 @@
 									placement="top-start"
 								>
 									<select
+										id="channel-type"
 										class="w-full text-sm bg-transparent placeholder:text-gray-300 dark:placeholder:text-gray-700 outline-hidden"
 										bind:value={type}
 									>
@@ -203,15 +218,16 @@
 					</div>
 
 					<div class="flex flex-col w-full mt-2">
-						<div class=" mb-1 text-xs text-gray-500">
+						<label for="channel-name" class="block mb-1 text-xs text-gray-500">
 							{$i18n.t('Channel Name')}
-							<span class="text-xs text-gray-200 dark:text-gray-800 ml-0.5"
-								>{type === 'dm' ? `${$i18n.t('Optional')}` : ''}</span
-							>
-						</div>
+							<span class="text-xs text-gray-200 dark:text-gray-800 ml-0.5">
+								{#if type === 'dm'}{$i18n.t('Optional')}{/if}
+							</span>
+						</label>
 
 						<div class="flex-1">
 							<input
+								id="channel-name"
 								class="w-full text-sm bg-transparent placeholder:text-gray-300 dark:placeholder:text-gray-700 outline-hidden"
 								type="text"
 								bind:value={name}
@@ -224,19 +240,36 @@
 					</div>
 
 					{#if type !== 'dm'}
-						<div class="-mx-2 mb-1 mt-2.5 px-2">
+						<div class="-mx-2 mb-1 mt-2.5 px-2" inert={loading} aria-busy={loading}>
 							{#if type === ''}
-								<AccessControl bind:accessControl accessRoles={['read', 'write']} />
+								<AccessControl
+									bind:accessGrants
+									accessRoles={['read', 'write']}
+									onChange={async (grants) => {
+										if (edit && channel?.id) {
+											const item = channel;
+											loading = true;
+											try {
+												await updateChannelAccessGrants(localStorage.token, item.id, grants);
+												item.access_grants = structuredClone(grants);
+												if (channel === item) accessGrants = item.access_grants;
+												toast.success($i18n.t('Saved'));
+												onUpdate();
+											} catch (error) {
+												if (channel === item)
+													accessGrants = structuredClone(item.access_grants ?? []);
+												toast.error(`${error}`);
+											} finally {
+												loading = false;
+											}
+										}
+									}}
+								/>
 							{:else if type === 'group'}
 								<Visibility
 									state={isPrivate ? 'private' : 'public'}
-									onChange={(value) => {
-										if (value === 'private') {
-											isPrivate = true;
-										} else {
-											isPrivate = false;
-										}
-										console.log(value, isPrivate);
+									onChange={(value: string) => {
+										isPrivate = value === 'private';
 									}}
 								/>
 							{/if}
@@ -265,10 +298,10 @@
 						</div>
 					{/if}
 
-					<div class="flex justify-end pt-3 text-sm font-medium gap-1.5">
+					<div class="flex justify-end pt-3 text-sm font-normal gap-1.5">
 						{#if edit}
 							<button
-								class="px-3.5 py-1.5 text-sm font-medium dark:bg-black dark:hover:bg-black/90 dark:text-white bg-white text-black hover:bg-gray-100 transition rounded-full flex flex-row space-x-1 items-center"
+								class="flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal transition disabled:opacity-60 dark:bg-black dark:hover:bg-black/90 dark:text-white bg-white text-black hover:bg-gray-100 flex-row"
 								type="button"
 								on:click={() => {
 									showDeleteConfirmDialog = true;
@@ -279,9 +312,7 @@
 						{/if}
 
 						<button
-							class="px-3.5 py-1.5 text-sm font-medium bg-black hover:bg-gray-950 text-white dark:bg-white dark:text-black dark:hover:bg-gray-100 transition rounded-full flex flex-row space-x-1 items-center {loading
-								? ' cursor-not-allowed'
-								: ''}"
+							class="flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-gray-900 px-2.5 text-xs font-normal text-white transition hover:bg-black disabled:opacity-60 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-white disabled:cursor-not-allowed"
 							type="submit"
 							disabled={loading}
 						>
@@ -292,8 +323,8 @@
 							{/if}
 
 							{#if loading}
-								<div class="ml-2 self-center">
-									<Spinner />
+								<div class="shrink-0">
+									<Spinner className="size-3" />
 								</div>
 							{/if}
 						</button>

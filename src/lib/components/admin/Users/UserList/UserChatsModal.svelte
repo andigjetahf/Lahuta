@@ -56,16 +56,12 @@
 
 		if (query === '') {
 			chatList = await getChatListByUserId(localStorage.token, user.id, page, filter);
+			allChatsLoaded = (chatList ?? []).length === 0;
 		} else {
 			searchDebounceTimeout = setTimeout(async () => {
 				chatList = await getChatListByUserId(localStorage.token, user.id, page, filter);
+				allChatsLoaded = (chatList ?? []).length === 0;
 			}, 500);
-		}
-
-		if ((chatList ?? []).length === 0) {
-			allChatsLoaded = true;
-		} else {
-			allChatsLoaded = false;
 		}
 	};
 
@@ -81,14 +77,18 @@
 		allChatsLoaded = newChatList.length === 0;
 
 		if (newChatList.length > 0) {
-			chatList = [...chatList, ...newChatList];
+			const existingIds = new Set(chatList.map((c) => c.id));
+			const uniqueNewChats = newChatList.filter((c) => !existingIds.has(c.id));
+			chatList = [...chatList, ...uniqueNewChats];
 		}
 
 		chatListLoading = false;
 	};
 
 	const init = async () => {
+		page = 1;
 		chatList = await getChatListByUserId(localStorage.token, user.id, page, filter);
+		allChatsLoaded = (chatList ?? []).length === 0;
 	};
 
 	$: if (show) {
