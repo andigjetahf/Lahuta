@@ -582,7 +582,11 @@ async def get_oauth_client_info_with_dynamic_client_registration(
             # LICENSE covers this Open WebUI OAuth client identifier.
             # Do not alter, remove, obscure, or replace it except as LICENSE permits:
             # https://docs.openwebui.com/license.
+<<<<<<< Updated upstream
             client_name='Open WebUI',
+=======
+            client_name='Lahuta',
+>>>>>>> Stashed changes
             redirect_uris=[f'{redirect_base_url}/oauth/clients/{client_id}/callback'],
             grant_types=['authorization_code', 'refresh_token'],
             response_types=['code'],

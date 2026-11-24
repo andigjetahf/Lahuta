@@ -515,7 +515,11 @@
 			if ($isLastActiveTab) {
 				if ($settings?.notificationEnabled ?? false) {
 					notify(
+<<<<<<< Updated upstream
 						`${data.title} / Open WebUI`,
+=======
+						`${data.title} / ${$WEBUI_NAME}`,
+>>>>>>> Stashed changes
 						{
 							body: timeStr,
 							// LICENSE covers this Open WebUI notification identifier.
@@ -562,7 +566,11 @@
 					if ($isLastActiveTab) {
 						if ($settings?.notificationEnabled ?? false) {
 							notify(
+<<<<<<< Updated upstream
 								`${displayTitle} / Open WebUI`,
+=======
+								`${displayTitle} / ${$WEBUI_NAME}`,
+>>>>>>> Stashed changes
 								{
 									body: contentPreview,
 									// LICENSE covers this Open WebUI notification identifier.
@@ -710,7 +718,11 @@
 						// Do not alter, remove, obscure, or replace it except as LICENSE permits:
 						// https://docs.openwebui.com/license.
 						notify(
+<<<<<<< Updated upstream
 							`${title} / Open WebUI`,
+=======
+							`${title} / ${$WEBUI_NAME}`,
+>>>>>>> Stashed changes
 							{
 								body: content,
 								icon: `${WEBUI_API_BASE_URL}/users/${data?.user?.id}/profile/image`

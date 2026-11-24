@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+<<<<<<< Updated upstream
 # Interactive docker compose launcher for Open WebUI.
+=======
+# Interactive docker compose launcher for Lahuta.
+>>>>>>> Stashed changes
 # Supports GPU auto-detection, configurable ports, data mounts, and Playwright.
 
 readonly BOLD='\033[1m'

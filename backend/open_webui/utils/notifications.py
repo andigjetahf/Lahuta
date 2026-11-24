@@ -342,7 +342,11 @@ def _notification_webhook_content(event: Any) -> tuple[str, str, dict[str, Any],
 # LICENSE covers this Open WebUI notification identifier.
 # Do not alter, remove, obscure, or replace it except as LICENSE permits:
 # https://docs.openwebui.com/license.
+<<<<<<< Updated upstream
 async def test_target(user_id: str, target_id: str, app_name: str = 'Open WebUI') -> dict[str, Any]:
+=======
+async def test_target(user_id: str, target_id: str, app_name: str = 'Lahuta') -> dict[str, Any]:
+>>>>>>> Stashed changes
     notifications = await _load_notifications(user_id)
     target = _find_target(notifications, target_id)
     if not target:
@@ -353,7 +357,11 @@ async def test_target(user_id: str, target_id: str, app_name: str = 'Open WebUI'
         # LICENSE covers this Open WebUI notification copy.
         # Do not alter, remove, obscure, or replace it except as LICENSE permits:
         # https://docs.openwebui.com/license.
+<<<<<<< Updated upstream
         'This is a test notification from Open WebUI.',
+=======
+        'This is a test notification from Lahuta.',
+>>>>>>> Stashed changes
         {'action': 'test', 'user_id': user_id},
         'Test notification',
     )
@@ -368,7 +376,11 @@ async def notify_target(
     message: str,
     target: str = '',
     title: str = '',
+<<<<<<< Updated upstream
     app_name: str = 'Open WebUI',
+=======
+    app_name: str = 'Lahuta',
+>>>>>>> Stashed changes
 ) -> dict[str, Any]:
     notifications = await _load_notifications(user_id)
     item = _find_target(notifications, target)
@@ -398,11 +410,20 @@ async def dispatch_notification_event(app: Any, event: Any) -> None:
         chat_id = data.get('chat_id') or (event.subject or {}).get('id')
         if event.event == CALENDAR_ALERT_EVENT or (chat_id and not str(chat_id).startswith('local:')):
             path = '/calendar' if event.event == CALENDAR_ALERT_EVENT else '/c/' + quote(str(chat_id), safe='')
+<<<<<<< Updated upstream
             title = str(data.get('title') or event.message or 'Open WebUI')
             body = str(data.get('message') or '')
             body = re.sub(r'<details\b[^>]*>.*?</details>', '', body, flags=re.DOTALL | re.IGNORECASE)
             try:
                 await notify(data.get('user_id'), event.id, f'{title} / Open WebUI', body, path)
+=======
+            app_name = getattr(getattr(app, 'state', None), 'WEBUI_NAME', 'Lahuta')
+            title = str(data.get('title') or event.message or app_name)
+            body = str(data.get('message') or '')
+            body = re.sub(r'<details\b[^>]*>.*?</details>', '', body, flags=re.DOTALL | re.IGNORECASE)
+            try:
+                await notify(data.get('user_id'), event.id, f'{title} / {app_name}', body, path)
+>>>>>>> Stashed changes
             except Exception:
                 log.exception('Tether notification delivery failed for event %s', event.id)
 
@@ -414,7 +435,11 @@ async def dispatch_notification_event(app: Any, event: Any) -> None:
     # LICENSE covers this Open WebUI notification identifier.
     # Do not alter, remove, obscure, or replace it except as LICENSE permits:
     # https://docs.openwebui.com/license.
+<<<<<<< Updated upstream
     app_name = getattr(getattr(app, 'state', None), 'WEBUI_NAME', 'Open WebUI')
+=======
+    app_name = getattr(getattr(app, 'state', None), 'WEBUI_NAME', 'Lahuta')
+>>>>>>> Stashed changes
     for user_id in event_user_ids(event):
         try:
             notifications = await _load_notifications(user_id)

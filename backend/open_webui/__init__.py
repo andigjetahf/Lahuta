@@ -18,12 +18,16 @@ DEFAULT_SECRET_KEY_LENGTH = 24
 
 def version_callback(value: bool) -> None:
     if value:
-        from open_webui.env import VERSION
+        from open_webui.env import VERSION, WEBUI_NAME
 
         # LICENSE covers this Open WebUI CLI identifier.
         # Do not alter, remove, obscure, or replace it except as LICENSE permits:
         # https://docs.openwebui.com/license.
+<<<<<<< Updated upstream
         typer.echo(f'Open WebUI version: {VERSION}')
+=======
+        typer.echo(f'{WEBUI_NAME} version: {VERSION} (Bërthama: Open WebUI)')
+>>>>>>> Stashed changes
         raise typer.Exit()
 
 

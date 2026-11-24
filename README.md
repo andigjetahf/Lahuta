@@ -23,8 +23,13 @@ Me motor të integruar për **RAG (Retrieval Augmented Generation)**, kërkim n�
 ## ✨ Veçoritë Kryesore të Lahuta
 
 - 🇦🇱 **Lokalizim 100% në Gjuhën Shqipe**: E gjithë ndërfaqja, menytë, njoftimet dhe cilësimet janë të parazgjedhura në shqip (`sq-AL`), me përshtatje gjuhësore me cilësi të lartë.
+<<<<<<< Updated upstream
 - 🚀 **Instalim i Thjeshtë me Docker**: Nisje e menjëhershme përmes Docker ose Docker Compose me mbështetje për GPU (Nvidia CUDA) dhe CPU.
 - 🤝 **Integrim i Gjithanshëm me Modelet LLM**: Lidhuni lehtësisht me serverin lokal të **Ollama**, ose integroni shërbime si **OpenAI**, **Anthropic**, **Gemini**, **Groq**, **Mistral**, **OpenRouter**, **LMStudio** dhe të tjera.
+=======
+- 🚀 **Instalim i Thjeshtë me Docker**: Nisje e pavarur përmes Docker Compose vetëm për Lahutën (pa pasur nevojë të shkarkoni Ollama lokalisht, me mbështetje për servera të jashtëm Ollama).
+- 🤝 **Integrim i Gjithanshëm me Modelet LLM**: Lidhuni lehtësisht me serverin tuaj të **Ollama** në cilindo server tjetër në rrjet, ose integroni shërbime si **OpenAI**, **Anthropic**, **Gemini**, **Groq**, **Mistral**, **OpenRouter**, **LMStudio** dhe të tjera.
+>>>>>>> Stashed changes
 - 📚 **RAG Lokal i Avancuar**: Ngarkoni dokumente (PDF, Word, Excel, tekst) drejtpërdrejt në bisedë me komandën `#`. Mbështet 9 baza të dhënash vektoriale (ChromaDB, PGVector, Qdrant, Milvus, Elasticsearch, etj.).
 - 🔍 **Kërkim në Ueb për RAG**: Merrni të dhëna në kohë reale nga interneti duke përdorur SearXNG, Google PSE, Brave Search, DuckDuckGo, Tavily dhe ofrues të tjerë.
 - 🌐 **Shfletim Uebi në Bisedë**: Përfshini përmbajtje nga faqet e internetit direkt në diskutim duke vendosur `#` e ndjekur nga një lidhje uebi (URL).
@@ -41,34 +46,27 @@ Me motor të integruar për **RAG (Retrieval Augmented Generation)**, kërkim n�
 
 ### Opsioni 1: Me Docker Compose (E Rekomanduar)
 
-Kloni depon dhe nisni shërbimet me Docker Compose:
+Kontejneri ngre vetëm shërbimin e **Lahutës** pa shkarkuar Ollama, pasi mund ta thërrisni Ollama nga një server tjetër:
 
 ```bash
-git clone https://github.com/andigjetahf/Lahuta.git
+# 1. Shkarkoni ose shkoni te dosja e Lahutës
 cd Lahuta
-docker compose up -d
+
+# 2. (Opsionale) Nëse Ollama ndodhet në një server tjetër, vendosni adresën e tij:
+export OLLAMA_BASE_URL="http://IP_E_SERVERIT_TUAJ:11434"
+
+# 3. Nisni kontejnerin
+docker compose up -d --build
 ```
 
-Pasi shërbimet të nisen, hapni shfletuesin tuaj në:
+Pasi shërbimi të ngrihet, hapni shfletuesin tuaj në:
 👉 **[http://localhost:3000](http://localhost:3000)**
 
 ### Opsioni 2: Me Docker CLI
 
-Nëse keni tashmë Ollama të instaluar në kompjuterin tuaj:
-
 ```bash
 docker run -d -p 3000:8080 \
-  --add-host=host.docker.internal:host-gateway \
-  -v lahuta-data:/app/backend/data \
-  --name lahuta \
-  --restart always \
-  sghtf/lahuta-ui
-```
-
-Për të aktivizuar mbështetjen e GPU-së (Nvidia CUDA):
-
-```bash
-docker run -d -p 3000:8080 --gpus all \
+  -e OLLAMA_BASE_URL="http://IP_E_SERVERIT_TUAJ:11434" \
   --add-host=host.docker.internal:host-gateway \
   -v lahuta-data:/app/backend/data \
   --name lahuta \
@@ -111,7 +109,7 @@ Ndërfaqja do të jetë e disponueshme në: **http://localhost:5173**
 | :--- | :--- | :--- |
 | `WEBUI_NAME` | Emri i aplikacionit në ndërfaqe | `"Lahuta"` |
 | `DEFAULT_LOCALE` | Gjuha kryesore e ndërfaqes | `"sq-AL"` (Shqip) |
-| `OLLAMA_BASE_URL` | URL-ja e serverit Ollama | `http://localhost:11434` |
+| `OLLAMA_BASE_URL` | URL-ja e serverit Ollama (mund të jetë server i jashtëm) | `http://host.docker.internal:11434` |
 | `OPENAI_API_BASE_URL` | URL-ja e pikës fundore të OpenAI | `https://api.openai.com/v1` |
 | `OPENAI_API_KEY` | Çelësi i API-së së OpenAI | Bosh |
 | `WEBUI_SECRET_KEY` | Çelësi i sigurisë për sesionet | Gjenerohet automatikisht |
@@ -122,15 +120,8 @@ Ndërfaqja do të jetë e disponueshme në: **http://localhost:5173**
 
 **Lahuta** është ndërtuar për komunitetin shqipfolës me synimin për të sjellë mjetet më të avancuara të inteligjencës artificiale në mënyrë të thjeshtë, të sigurt dhe të plotë në gjuhën shqipe.
 
-Nëse dëshironi të kontribuoni me ide, përmirësime ose shtesa:
-1. Bëni **Fork** projektin
-2. Krijoni një degë të re (`git checkout -b permiresim-i-ri`)
-3. Bëni **Commit** ndryshimet (`git commit -m 'Shto veçori të re'`)
-4. Bëni **Push** në degë (`git push origin permiresim-i-ri`)
-5. Hapni një **Pull Request**
-
 ---
 
-## 📜 Licenca
+## 📜 Licenca dhe Bërthama
 
-Ky projekt bazohet në kod me burim të hapur dhe licencohet sipas kushteve të përcaktuara në skedarin [LICENSE](./LICENSE).
+Ky projekt përdor si bërthamë teknologjike Open WebUI dhe zhvillohet si sistem i pavarur i lokalizuar dhe i përshtatur për Lahutën. Licencohet sipas kushteve të përcaktuara në skedarin [LICENSE](./LICENSE).

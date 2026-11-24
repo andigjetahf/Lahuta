@@ -1,34 +1,20 @@
 services:
-  ollama:
-    volumes:
-      # Map a specific local folder to the container to manage custom models
-      - ./local_models:/root/.ollama/models 
-      - ollama:/root/.ollama
-    container_name: ollama
-    tty: true
-    restart: unless-stopped
-    image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
-
   lahuta-ui:
     build:
-      context: ./ # Ensure this points to your UI source code
+      context: ./
       dockerfile: Dockerfile
-    # Tagging it locally prevents accidental pulls from overriding your build
     image: local-lahuta-ui:custom 
     container_name: lahuta-ui
     volumes:
       - lahuta-ui:/app/backend/data
-    depends_on:
-      - ollama
     ports:
-      - ${OPEN_WEBUI_PORT-3000}:8080
+      - ${OPEN_WEBUI_PORT:-3000}:8080
     environment:
-      - 'OLLAMA_BASE_URL=http://ollama:11434'
-      - 'WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}'
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
 volumes:
-  ollama: {}
   lahuta-ui: {}

@@ -40,7 +40,11 @@ def replace_skill_mentions_with_labels(text: str) -> str:
 SKILLS_CREATE_RE = re.compile(r'^/skills:create(?:\s+(.*))?$', re.IGNORECASE | re.DOTALL)
 
 OPEN_WEBUI_SKILL_AUTHORING_STANDARDS = """\
+<<<<<<< Updated upstream
 Follow the Open WebUI skill-authoring standards:
+=======
+Follow the Lahuta skill-authoring standards:
+>>>>>>> Stashed changes
 
 Frontmatter:
 - name: lowercase-hyphenated, <=64 chars, no spaces.
@@ -90,7 +94,11 @@ def _build_skill_create_prompt(user_request: str) -> str:
             'steps taken and distill them into a reusable skill'
         )
     return (
+<<<<<<< Updated upstream
         '[/skills:create] The user wants you to create a reusable Open WebUI skill '
+=======
+        '[/skills:create] The user wants you to create a reusable Lahuta skill '
+>>>>>>> Stashed changes
         'in the workspace and save it with create_skill. No terminal is required.\n\n'
         f'THE REQUEST:\n{req}\n\n'
         'The request is open-ended and may mix SOURCES to gather (directories, '

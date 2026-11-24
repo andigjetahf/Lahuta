@@ -76,7 +76,11 @@
 					Do not alter, remove, obscure, or replace it except as LICENSE permits:
 					https://docs.openwebui.com/license. -->
 					<div class="mb-4 text-[0.6875rem] font-medium tracking-[0.18em] uppercase opacity-35">
+<<<<<<< Updated upstream
 						Open WebUI
+=======
+						{$WEBUI_NAME}
+>>>>>>> Stashed changes
 					</div>
 
 					<h1

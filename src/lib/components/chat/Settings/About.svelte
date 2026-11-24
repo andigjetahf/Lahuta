@@ -179,6 +179,10 @@
 				<a href="https://github.com/open-webui/open-webui/blob/main/LICENSE" target="_blank"
 					>{$i18n.t('All rights reserved.')}</a
 				>
+<<<<<<< Updated upstream
+=======
+				<span class="block mt-0.5 text-gray-500 dark:text-gray-400 font-medium">Lahuta — {$i18n.t('E ndërtuar mbi bërthamën Open WebUI')}</span>
+>>>>>>> Stashed changes
 			</div>
 
 			<div class="text-xs text-gray-400 dark:text-gray-500">
