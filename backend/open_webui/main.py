@@ -355,7 +355,11 @@ if LOG_FORMAT != 'json':
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 v{VERSION} - building the best AI user interface.
+=======
+v{VERSION} - Lahuta (Bërthama: Open WebUI)
+>>>>>>> Stashed changes
 =======
 v{VERSION} - Lahuta (Bërthama: Open WebUI)
 >>>>>>> Stashed changes
@@ -370,7 +374,11 @@ https://github.com/open-webui/open-webui
         # Do not alter, remove, obscure, or replace it except as LICENSE permits:
         # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         print(f'Open WebUI v{VERSION} - building the best AI user interface.\nhttps://github.com/open-webui/open-webui')
+=======
+        print(f'{WEBUI_NAME} v{VERSION} (Bërthama: Open WebUI)\nhttps://github.com/open-webui/open-webui')
+>>>>>>> Stashed changes
 =======
         print(f'{WEBUI_NAME} v{VERSION} (Bërthama: Open WebUI)\nhttps://github.com/open-webui/open-webui')
 >>>>>>> Stashed changes
@@ -561,7 +569,11 @@ apply_orjson_http_json()
 # https://docs.openwebui.com/license.
 app = FastAPI(
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     title='Open WebUI',
+=======
+    title=WEBUI_NAME,
+>>>>>>> Stashed changes
 =======
     title=WEBUI_NAME,
 >>>>>>> Stashed changes

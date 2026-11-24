@@ -2,7 +2,11 @@
 set -euo pipefail
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Interactive docker compose launcher for Open WebUI.
+=======
+# Interactive docker compose launcher for Lahuta.
+>>>>>>> Stashed changes
 =======
 # Interactive docker compose launcher for Lahuta.
 >>>>>>> Stashed changes

@@ -41,7 +41,11 @@ SKILLS_CREATE_RE = re.compile(r'^/skills:create(?:\s+(.*))?$', re.IGNORECASE | r
 
 OPEN_WEBUI_SKILL_AUTHORING_STANDARDS = """\
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Follow the Open WebUI skill-authoring standards:
+=======
+Follow the Lahuta skill-authoring standards:
+>>>>>>> Stashed changes
 =======
 Follow the Lahuta skill-authoring standards:
 >>>>>>> Stashed changes
@@ -95,7 +99,11 @@ def _build_skill_create_prompt(user_request: str) -> str:
         )
     return (
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         '[/skills:create] The user wants you to create a reusable Open WebUI skill '
+=======
+        '[/skills:create] The user wants you to create a reusable Lahuta skill '
+>>>>>>> Stashed changes
 =======
         '[/skills:create] The user wants you to create a reusable Lahuta skill '
 >>>>>>> Stashed changes

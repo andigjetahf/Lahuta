@@ -131,7 +131,11 @@ class ERROR_MESSAGES(str, Enum):
     # Do not alter, remove, obscure, or replace it except as LICENSE permits:
     # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     SERVER_CONNECTION_ERROR = 'Open WebUI: Server Connection Error'
+=======
+    SERVER_CONNECTION_ERROR = 'Lahuta: Gabim në lidhjen me serverin'
+>>>>>>> Stashed changes
 =======
     SERVER_CONNECTION_ERROR = 'Lahuta: Gabim në lidhjen me serverin'
 >>>>>>> Stashed changes

@@ -603,7 +603,11 @@ Conversation:
                     # Do not alter, remove, obscure, or replace it except as LICENSE permits:
                     # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                     'content': "You are Open WebUI's private memory reviewer. Return only valid JSON.",
+=======
+                    'content': "You are Lahuta's private memory reviewer. Return only valid JSON.",
+>>>>>>> Stashed changes
 =======
                     'content': "You are Lahuta's private memory reviewer. Return only valid JSON.",
 >>>>>>> Stashed changes

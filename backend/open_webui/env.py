@@ -967,7 +967,11 @@ WEBUI_NAME = os.getenv('WEBUI_NAME', 'Lahuta')
 # Do not alter, remove, obscure, or replace it except as LICENSE permits:
 # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 WEBUI_FAVICON_URL = 'https://openwebui.com/favicon.png'
+=======
+WEBUI_FAVICON_URL = os.getenv('WEBUI_FAVICON_URL', '/static/favicon.png')
+>>>>>>> Stashed changes
 =======
 WEBUI_FAVICON_URL = os.getenv('WEBUI_FAVICON_URL', '/static/favicon.png')
 >>>>>>> Stashed changes

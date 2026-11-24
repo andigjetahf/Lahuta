@@ -387,7 +387,11 @@ async def _raise_tts_error(exc: Exception, r=None) -> None:
     # Do not alter, remove, obscure, or replace it except as LICENSE permits:
     # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     detail = 'Open WebUI: Server Connection Error'
+=======
+    detail = ERROR_MESSAGES.SERVER_CONNECTION_ERROR
+>>>>>>> Stashed changes
 =======
     detail = ERROR_MESSAGES.SERVER_CONNECTION_ERROR
 >>>>>>> Stashed changes
@@ -975,7 +979,11 @@ async def _transcribe_openai(request, file_path, filename, languages, file_dir, 
         # Do not alter, remove, obscure, or replace it except as LICENSE permits:
         # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         raise Exception(detail if detail else 'Open WebUI: Server Connection Error')
+=======
+        raise Exception(detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR)
+>>>>>>> Stashed changes
 =======
         raise Exception(detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR)
 >>>>>>> Stashed changes
@@ -1033,7 +1041,11 @@ async def _transcribe_deepgram(request, file_path, languages, file_dir, id):
         # Do not alter, remove, obscure, or replace it except as LICENSE permits:
         # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         detail = 'Open WebUI: Server Connection Error'
+=======
+        detail = ERROR_MESSAGES.SERVER_CONNECTION_ERROR
+>>>>>>> Stashed changes
 =======
         detail = ERROR_MESSAGES.SERVER_CONNECTION_ERROR
 >>>>>>> Stashed changes
@@ -1173,7 +1185,11 @@ async def _transcribe_azure(request, file_path, filename, file_dir, id):
         raise HTTPException(
             status_code=e.status if e.status else 500,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             detail=detail if detail else 'Open WebUI: Server Connection Error',
+=======
+            detail=detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
+>>>>>>> Stashed changes
 =======
             detail=detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
 >>>>>>> Stashed changes
@@ -1350,7 +1366,11 @@ async def _transcribe_mistral(request, file_path, filename, metadata, file_dir, 
         raise HTTPException(
             status_code=e.status if e.status else 500,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             detail=detail if detail else 'Open WebUI: Server Connection Error',
+=======
+            detail=detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
+>>>>>>> Stashed changes
 =======
             detail=detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
 >>>>>>> Stashed changes

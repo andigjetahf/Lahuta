@@ -2,15 +2,21 @@
 set -euo pipefail
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Build and run the Open WebUI Docker container locally.
 
 readonly IMAGE="open-webui"
 readonly CONTAINER="open-webui"
 =======
+=======
+>>>>>>> Stashed changes
 # Build and run the Lahuta Docker container locally.
 
 readonly IMAGE="sghtf/lahuta-ui"
 readonly CONTAINER="lahuta-ui"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 readonly HOST_PORT="${OPEN_WEBUI_PORT:-3000}"
 readonly CONTAINER_PORT=8080
@@ -26,8 +32,14 @@ echo "Starting ${CONTAINER}..."
 docker run -d \
   -p "${HOST_PORT}:${CONTAINER_PORT}" \
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   --add-host=host.docker.internal:host-gateway \
   -v "${IMAGE}:/app/backend/data" \
+=======
+  -e OLLAMA_BASE_URL="${OLLAMA_BASE_URL:-http://host.docker.internal:11434}" \
+  --add-host=host.docker.internal:host-gateway \
+  -v "lahuta-ui:/app/backend/data" \
+>>>>>>> Stashed changes
 =======
   -e OLLAMA_BASE_URL="${OLLAMA_BASE_URL:-http://host.docker.internal:11434}" \
   --add-host=host.docker.internal:host-gateway \
@@ -41,7 +53,11 @@ echo "Cleaning up dangling images..."
 docker image prune -f
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 echo "Open WebUI is running at http://localhost:${HOST_PORT}"
+=======
+echo "Lahuta is running at http://localhost:${HOST_PORT}"
+>>>>>>> Stashed changes
 =======
 echo "Lahuta is running at http://localhost:${HOST_PORT}"
 >>>>>>> Stashed changes

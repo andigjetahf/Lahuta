@@ -461,7 +461,11 @@
 	"by {{name}}": "Nga {{name}}",
 	"By {{name}}": "Nga {{name}}",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"By supporting the project through sponsorship or an enterprise license, you help us stay independent, ship new features faster, improve stability, and grow Open WebUI for the long haul.": "Duke mbështetur projektin përmes sponsorizimit ose një licence për ndërmarrje, ju na ndihmoni të qëndrojmë të pavarur, të sjellim veçori të reja më shpejt, të përmirësojmë qëndrueshmërinë dhe të rrisim Open WebUI në plan afatgjatë.",
+=======
+	"By supporting the project through sponsorship or an enterprise license, you help us stay independent, ship new features faster, improve stability, and grow Open WebUI for the long haul.": "Duke mbështetur projektin përmes sponsorizimit ose një licence për ndërmarrje, ju na ndihmoni të qëndrojmë të pavarur, të sjellim veçori të reja më shpejt, të përmirësojmë qëndrueshmërinë dhe të rrisim Lahutën në plan afatgjatë.",
+>>>>>>> Stashed changes
 =======
 	"By supporting the project through sponsorship or an enterprise license, you help us stay independent, ship new features faster, improve stability, and grow Open WebUI for the long haul.": "Duke mbështetur projektin përmes sponsorizimit ose një licence për ndërmarrje, ju na ndihmoni të qëndrojmë të pavarur, të sjellim veçori të reja më shpejt, të përmirësojmë qëndrueshmërinë dhe të rrisim Lahutën në plan afatgjatë.",
 >>>>>>> Stashed changes
@@ -708,7 +712,11 @@
 	"Conflicts": "Konflikte",
 	"Connect": "Lidhu",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Connect external apps to Open WebUI.": "Lidhni aplikacione të jashtme me Open WebUI.",
+=======
+	"Connect external apps to Open WebUI.": "Lidhni aplikacione të jashtme me Lahutën.",
+>>>>>>> Stashed changes
 =======
 	"Connect external apps to Open WebUI.": "Lidhni aplikacione të jashtme me Lahutën.",
 >>>>>>> Stashed changes
@@ -1052,7 +1060,11 @@
 	"Do not install functions from sources you do not fully trust.": "Mos instaloni funksione nga burime që nuk i besoni plotësisht.",
 	"Do not install tools from sources you do not fully trust.": "Mos instaloni mjetet nga burime që nuk i besoni plotësisht.",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Do you want to sync your usage stats with Open WebUI Community?": "Dëshironi të sinkronizoni statistikat tuaja të përdorimit me komunitetin e Open WebUI?",
+=======
+	"Do you want to sync your usage stats with Open WebUI Community?": "Dëshironi të sinkronizoni statistikat tuaja të përdorimit me komunitetin (Open WebUI bërthamë)?",
+>>>>>>> Stashed changes
 =======
 	"Do you want to sync your usage stats with Open WebUI Community?": "Dëshironi të sinkronizoni statistikat tuaja të përdorimit me komunitetin (Open WebUI bërthamë)?",
 >>>>>>> Stashed changes
@@ -1377,7 +1389,11 @@
 	"Event created": "Ngjarja u krijua",
 	"Event deleted": "Ngjarja u fshi",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Event names may change as Open WebUI evolves. Use broad patterns like user.* for integrations that should continue across new related events.": "Emrat e ngjarjeve mund të ndryshojnë me evolucionin e Open WebUI. Përdorni modele të gjera si user.* për integrimet që duhet të vazhdojnë nëpër ngjarje të reja të lidhura.",
+=======
+	"Event names may change as Open WebUI evolves. Use broad patterns like user.* for integrations that should continue across new related events.": "Emrat e ngjarjeve mund të ndryshojnë me evolucionin e Lahutës. Përdorni modele të gjera si user.* për integrimet që duhet të vazhdojnë nëpër ngjarje të reja të lidhura.",
+>>>>>>> Stashed changes
 =======
 	"Event names may change as Open WebUI evolves. Use broad patterns like user.* for integrations that should continue across new related events.": "Emrat e ngjarjeve mund të ndryshojnë me evolucionin e Lahutës. Përdorni modele të gjera si user.* për integrimet që duhet të vazhdojnë nëpër ngjarje të reja të lidhura.",
 >>>>>>> Stashed changes
@@ -1435,7 +1451,11 @@
 	"External Document Loader URL required.": "URL-ja e ngarkuesit të jashtëm të dokumenteve kërkohet.",
 	"External Knowledge Source": "Burim i jashtëm i njohurive",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"External vectors must be generated with the same embedding model configured in Open WebUI.": "Vektorët e jashtëm duhet të gjenerohen me të njëjtin model embedding të konfiguruar në Open WebUI.",
+=======
+	"External vectors must be generated with the same embedding model configured in Open WebUI.": "Vektorët e jashtëm duhet të gjenerohen me të njëjtin model embedding të konfiguruar në Lahutë.",
+>>>>>>> Stashed changes
 =======
 	"External vectors must be generated with the same embedding model configured in Open WebUI.": "Vektorët e jashtëm duhet të gjenerohen me të njëjtin model embedding të konfiguruar në Lahutë.",
 >>>>>>> Stashed changes
@@ -1613,7 +1633,11 @@
 	"Forward": "Përpara",
 	"Forward cookies": "Përcill biskotat (cookies)",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Forward cookies from your Open WebUI request to this server.": "Përcillni biskotat (cookies) nga kërkesa juaj e Open WebUI te ky server.",
+=======
+	"Forward cookies from your Open WebUI request to this server.": "Përcillni biskotat (cookies) nga kërkesa juaj e Lahutës te ky server.",
+>>>>>>> Stashed changes
 =======
 	"Forward cookies from your Open WebUI request to this server.": "Përcillni biskotat (cookies) nga kërkesa juaj e Lahutës te ky server.",
 >>>>>>> Stashed changes
@@ -1650,7 +1674,11 @@
 	"Generate Message Pair": "Gjenero çift mesazhesh",
 	"Generate recovery codes": "Gjenero kodet e rikuperimit",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Generated from the name, or enter your own. Identifies this connection in Open WebUI, separately from the OAuth client ID.": "Gjeneruar nga emri, ose vendosni tuajin. Identifikon këtë lidhje në Open WebUI, veçmas nga ID-ja e klientit OAuth.",
+=======
+	"Generated from the name, or enter your own. Identifies this connection in Open WebUI, separately from the OAuth client ID.": "Gjeneruar nga emri, ose vendosni tuajin. Identifikon këtë lidhje në Lahutë, veçmas nga ID-ja e klientit OAuth.",
+>>>>>>> Stashed changes
 =======
 	"Generated from the name, or enter your own. Identifies this connection in Open WebUI, separately from the OAuth client ID.": "Gjeneruar nga emri, ose vendosni tuajin. Identifikon këtë lidhje në Lahutë, veçmas nga ID-ja e klientit OAuth.",
 >>>>>>> Stashed changes
@@ -1713,7 +1741,11 @@
 	"Help me study vocabulary: write a sentence for me to fill in the blank, and I'll try to pick the correct option.": "Më ndihmo të mësoj fjalor: shkruaj një fjali që të plotësoj vendin bosh dhe unë do të përpiqem të zgjedh opsionin e saktë.",
 	"Help the community discover great models": "Ndihmoni komunitetin të zbulojë modele të shkëlqyera",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Help us translate Open WebUI!": "Na ndihmoni të përkthejmë Open WebUI!",
+=======
+	"Help us translate Open WebUI!": "Na ndihmoni të përkthejmë Lahutën!",
+>>>>>>> Stashed changes
 =======
 	"Help us translate Open WebUI!": "Na ndihmoni të përkthejmë Lahutën!",
 >>>>>>> Stashed changes
@@ -1755,7 +1787,11 @@
 	"ID copied to clipboard": "ID-ja u kopjua në kujtesën e fragmenteve",
 	"ID or name already exists. Choose a unique ID and name for a copy.": "ID-ja ose emri ekziston tashmë. Zgjidhni një ID dhe emër unik për një kopje.",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Identifies this connection in Open WebUI, separately from the OAuth client ID.": "Identifikon këtë lidhje në Open WebUI, veçmas nga ID-ja e klientit OAuth.",
+=======
+	"Identifies this connection in Open WebUI, separately from the OAuth client ID.": "Identifikon këtë lidhje në Lahutë, veçmas nga ID-ja e klientit OAuth.",
+>>>>>>> Stashed changes
 =======
 	"Identifies this connection in Open WebUI, separately from the OAuth client ID.": "Identifikon këtë lidhje në Lahutë, veçmas nga ID-ja e klientit OAuth.",
 >>>>>>> Stashed changes
@@ -1985,7 +2021,11 @@
 	"LTR": "LTR (Nga e majta në të djathtë)",
 	"Made by an automation": "Krijuar nga një automatizim",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Made by Open WebUI Community": "Krijuar nga komuniteti i Open WebUI",
+=======
+	"Made by Open WebUI Community": "Krijuar nga komuniteti (bërthama Open WebUI)",
+>>>>>>> Stashed changes
 =======
 	"Made by Open WebUI Community": "Krijuar nga komuniteti (bërthama Open WebUI)",
 >>>>>>> Stashed changes
@@ -2660,7 +2700,11 @@
 	"Recover your authenticator": "Riktheni vërtetuesin tuaj",
 	"Recovery code": "Kodi i rikthimit",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Redirecting you to Open WebUI Community": "Duke ju ridrejtuar te komuniteti i Open WebUI",
+=======
+	"Redirecting you to Open WebUI Community": "Duke ju ridrejtuar te komuniteti (Open WebUI)",
+>>>>>>> Stashed changes
 =======
 	"Redirecting you to Open WebUI Community": "Duke ju ridrejtuar te komuniteti (Open WebUI)",
 >>>>>>> Stashed changes
@@ -2762,7 +2806,11 @@
 	"responses with recorded usage": "përgjigje me përdorim të regjistruar",
 	"Restart": "Rinis",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Restart all Open WebUI instances to apply changes to the provider connection settings.": "Rinisni të gjitha instancat e Open WebUI për të zbatuar ndryshimet në cilësimet e lidhjes së ofruesit.",
+=======
+	"Restart all Open WebUI instances to apply changes to the provider connection settings.": "Rinisni të gjitha instancat e Lahutës për të zbatuar ndryshimet në cilësimet e lidhjes së ofruesit.",
+>>>>>>> Stashed changes
 =======
 	"Restart all Open WebUI instances to apply changes to the provider connection settings.": "Rinisni të gjitha instancat e Lahutës për të zbatuar ndryshimet në cilësimet e lidhjes së ofruesit.",
 >>>>>>> Stashed changes
@@ -2805,7 +2853,11 @@
 	"Running": "Në ekzekutim",
 	"Running {{NAME}}": "Po ekzekutohet {{NAME}}",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Running Open WebUI for a team?": "Po e përdorni Open WebUI për një ekip?",
+=======
+	"Running Open WebUI for a team?": "Po përdorni Lahutën për një ekip?",
+>>>>>>> Stashed changes
 =======
 	"Running Open WebUI for a team?": "Po përdorni Lahutën për një ekip?",
 >>>>>>> Stashed changes
@@ -3067,7 +3119,11 @@
 	"settings.admin.audio.sttOpenaiApiBaseUrl.label": "URL-ja bazë e API-së",
 	"settings.admin.audio.sttOpenaiApiKey.label": "Çelësi API",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.audio.sttWhisperModel.description": "Open WebUI përdor faster-whisper nga brenda.",
+=======
+	"settings.admin.audio.sttWhisperModel.description": "Lahuta përdor faster-whisper nga brenda.",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.audio.sttWhisperModel.description": "Lahuta përdor faster-whisper nga brenda.",
 >>>>>>> Stashed changes
@@ -3083,7 +3139,11 @@
 	"settings.admin.audio.ttsMistralApiBaseUrl.label": "URL-ja bazë e API-së",
 	"settings.admin.audio.ttsMistralApiKey.label": "Çelësi API",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.audio.ttsModel.description": "Open WebUI përdor SpeechT5 dhe ngulitjet e folësve CMU Arctic.",
+=======
+	"settings.admin.audio.ttsModel.description": "Lahuta përdor SpeechT5 dhe ngulitjet e folësve CMU Arctic.",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.audio.ttsModel.description": "Lahuta përdor SpeechT5 dhe ngulitjet e folësve CMU Arctic.",
 >>>>>>> Stashed changes
@@ -3141,17 +3201,23 @@
 	"settings.admin.authentication.enableGroupCreation.description": "Krijo automatikisht grupet që mungojnë nga grupet LDAP.",
 	"settings.admin.authentication.enableGroupCreation.label": "Krijimi automatik i grupeve",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.authentication.enableGroupManagement.description": "Përputh grupet LDAP me grupet e Open WebUI.",
 	"settings.admin.authentication.enableGroupManagement.label": "Përputhja e grupeve",
 	"settings.admin.authentication.enableOauthGroupCreation.description": "Krijo automatikisht grupet që mungojnë nga pretendimet OAuth.",
 	"settings.admin.authentication.enableOauthGroupCreation.label": "Krijimi automatik i grupeve",
 	"settings.admin.authentication.enableOauthGroupManagement.description": "Përputh pretendimet OAuth me grupet e Open WebUI.",
 =======
+=======
+>>>>>>> Stashed changes
 	"settings.admin.authentication.enableGroupManagement.description": "Përputh grupet LDAP me grupet e Lahutës.",
 	"settings.admin.authentication.enableGroupManagement.label": "Përputhja e grupeve",
 	"settings.admin.authentication.enableOauthGroupCreation.description": "Krijo automatikisht grupet që mungojnë nga pretendimet OAuth.",
 	"settings.admin.authentication.enableOauthGroupCreation.label": "Krijimi automatik i grupeve",
 	"settings.admin.authentication.enableOauthGroupManagement.description": "Përputh pretendimet OAuth me grupet e Lahutës.",
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	"settings.admin.authentication.enableOauthGroupManagement.label": "Përputhja e grupeve",
 	"settings.admin.authentication.groupAttribute.description": "Atributi LDAP që përmban anëtarësimet në grupe të përdoruesit.",
@@ -3191,7 +3257,11 @@
 	"settings.admin.authentication.redirectUri.description": "URI-ja e kthimit e regjistruar te ofruesi.",
 	"settings.admin.authentication.redirectUri.label": "URI e ridrejtimit",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.authentication.roleMapping.description": "Përputh pretendimet OAuth me rolet e Open WebUI.",
+=======
+	"settings.admin.authentication.roleMapping.description": "Përputh pretendimet OAuth me rolet e Lahutës.",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.authentication.roleMapping.description": "Përputh pretendimet OAuth me rolet e Lahutës.",
 >>>>>>> Stashed changes
@@ -3226,7 +3296,11 @@
 	"settings.admin.codeExecution.codeExecutionEngine.description": "Zgjidhni mjedisin e ekzekutimit (runtime) të përdorur për blloqet e kodit të gjeneruar.",
 	"settings.admin.codeExecution.codeExecutionEngine.label": "Motori i ekzekutimit të kodit",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.codeExecution.codeExecutionJupyterAuth.description": "Zgjidhni mënyrën se si Open WebUI autentifikohet me serverin Jupyter.",
+=======
+	"settings.admin.codeExecution.codeExecutionJupyterAuth.description": "Zgjidhni mënyrën se si Lahuta autentifikohet me serverin Jupyter.",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.codeExecution.codeExecutionJupyterAuth.description": "Zgjidhni mënyrën se si Lahuta autentifikohet me serverin Jupyter.",
 >>>>>>> Stashed changes
@@ -3241,7 +3315,11 @@
 	"settings.admin.codeExecution.codeInterpreterEngine.description": "Zgjidhni mjedisin e ekzekutimit që përdoret nga vegla e interpretuesit të kodit.",
 	"settings.admin.codeExecution.codeInterpreterEngine.label": "Motori i interpretuesit të kodit",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.codeExecution.codeInterpreterJupyterAuth.description": "Zgjidhni mënyrën se si Open WebUI autentifikohet me serverin Jupyter.",
+=======
+	"settings.admin.codeExecution.codeInterpreterJupyterAuth.description": "Zgjidhni mënyrën se si Lahuta autentifikohet me serverin Jupyter.",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.codeExecution.codeInterpreterJupyterAuth.description": "Zgjidhni mënyrën se si Lahuta autentifikohet me serverin Jupyter.",
 >>>>>>> Stashed changes
@@ -3475,7 +3553,11 @@
 	"settings.admin.evaluations.title": "Vlerësimet",
 	"settings.admin.general.addBanner.label": "Shto banderolë",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.general.apps.description": "Lejo administratorët të lidhin aplikacione të jashtme me Open WebUI.",
+=======
+	"settings.admin.general.apps.description": "Lejo administratorët të lidhin aplikacione të jashtme me Lahutën.",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.general.apps.description": "Lejo administratorët të lidhin aplikacione të jashtme me Lahutën.",
 >>>>>>> Stashed changes
@@ -3491,7 +3573,11 @@
 	"settings.admin.general.comments.description": "Lejo përdoruesit të komentojnë mbi elementët e hapësirës së punës, shënimet dhe bisedat ku kanë qasje.",
 	"settings.admin.general.comments.label": "Komentet",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.general.communitySharing.description": "Lejo përdoruesit të ndajnë bisedat me komunitetin e Open WebUI.",
+=======
+	"settings.admin.general.communitySharing.description": "Lejo përdoruesit të ndajnë bisedat me komunitetin (Open WebUI Hub).",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.general.communitySharing.description": "Lejo përdoruesit të ndajnë bisedat me komunitetin (Open WebUI Hub).",
 >>>>>>> Stashed changes
@@ -3506,7 +3592,11 @@
 	"settings.admin.general.folders.description": "Lejo përdoruesit të organizojnë bisedat në dosje.",
 	"settings.admin.general.folders.label": "Dosjet",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"settings.admin.general.help.description": "Zbuloni se si të përdorni Open WebUI dhe kërkoni mbështetje nga komuniteti.",
+=======
+	"settings.admin.general.help.description": "Zbuloni se si të përdorni Lahutën dhe kërkoni mbështetje nga komuniteti.",
+>>>>>>> Stashed changes
 =======
 	"settings.admin.general.help.description": "Zbuloni se si të përdorni Lahutën dhe kërkoni mbështetje nga komuniteti.",
 >>>>>>> Stashed changes
@@ -4233,7 +4323,11 @@
 	"Share Chat": "Ndaj bisedën",
 	"Share link copied to clipboard.": "Lidhja e ndarjes u kopjua në kujtesën e fragmenteve.",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"Share to Open WebUI Community": "Ndaj në komunitetin e Open WebUI",
+=======
+	"Share to Open WebUI Community": "Ndaj në komunitet (Open WebUI)",
+>>>>>>> Stashed changes
 =======
 	"Share to Open WebUI Community": "Ndaj në komunitet (Open WebUI)",
 >>>>>>> Stashed changes
@@ -4507,7 +4601,11 @@
 	"This is a default user permission and will remain enabled.": "Kjo është një leje e parazgjedhur e përdoruesit dhe do të mbetet e aktivizuar.",
 	"This is an experimental feature, it may not function as expected and is subject to change at any time.": "Kjo është një veçori eksperimentale, mund të mos funksionojë siç pritet dhe mund të ndryshojë në çdo kohë.",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"This knowledge base retrieves from a connected source. Open WebUI can query it, but cannot upload, sync, edit, delete, reset, or reindex its source data.": "Kjo bazë njohurish merr të dhëna nga një burim i lidhur. Open WebUI mund ta kërkojë atë, por nuk mund të ngarkojë, sinkronizojë, redaktojë, fshijë, rivendosë ose riindeksojë të dhënat e burimit të saj.",
+=======
+	"This knowledge base retrieves from a connected source. Open WebUI can query it, but cannot upload, sync, edit, delete, reset, or reindex its source data.": "Kjo bazë njohurish merr të dhëna nga një burim i lidhur. Lahuta mund ta kërkojë atë, por nuk mund të ngarkojë, sinkronizojë, redaktojë, fshijë, rivendosë ose riindeksojë të dhënat e burimit të saj.",
+>>>>>>> Stashed changes
 =======
 	"This knowledge base retrieves from a connected source. Open WebUI can query it, but cannot upload, sync, edit, delete, reset, or reindex its source data.": "Kjo bazë njohurish merr të dhëna nga një burim i lidhur. Lahuta mund ta kërkojë atë, por nuk mund të ngarkojë, sinkronizojë, redaktojë, fshijë, rivendosë ose riindeksojë të dhënat e burimit të saj.",
 >>>>>>> Stashed changes
@@ -4949,7 +5047,11 @@
 	"You do not have permission to upload web content.": "Nuk keni leje për të ngarkuar përmbajtje uebi.",
 	"You do not have permission to use side chat.": "Nuk keni leje për të përdorur bisedën anësore.",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"You have more than 50 users, which often means this workspace is supporting organizational use. Open WebUI is free to use as-is, with no restrictions or hidden limits, and we want to keep it that way.": "Keni më shumë se 50 përdorues, gjë që shpesh nënkupton se kjo hapësirë pune po mbështet përdorim organizativ. Open WebUI është falas për t'u përdorur siç është, pa kufizime ose limite të fshehura, dhe ne dëshirojmë ta mbajmë ashtu.",
+=======
+	"You have more than 50 users, which often means this workspace is supporting organizational use. Open WebUI is free to use as-is, with no restrictions or hidden limits, and we want to keep it that way.": "Keni më shumë se 50 përdorues, gjë që shpesh nënkupton se kjo hapësirë pune po mbështet përdorim organizativ. Lahuta është falas për t'u përdorur siç është, pa kufizime ose limite të fshehura, dhe ne dëshirojmë ta mbajmë ashtu.",
+>>>>>>> Stashed changes
 =======
 	"You have more than 50 users, which often means this workspace is supporting organizational use. Open WebUI is free to use as-is, with no restrictions or hidden limits, and we want to keep it that way.": "Keni më shumë se 50 përdorues, gjë që shpesh nënkupton se kjo hapësirë pune po mbështet përdorim organizativ. Lahuta është falas për t'u përdorur siç është, pa kufizime ose limite të fshehura, dhe ne dëshirojmë ta mbajmë ashtu.",
 >>>>>>> Stashed changes

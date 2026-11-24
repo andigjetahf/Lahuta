@@ -516,7 +516,11 @@
 				if ($settings?.notificationEnabled ?? false) {
 					notify(
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 						`${data.title} / Open WebUI`,
+=======
+						`${data.title} / ${$WEBUI_NAME}`,
+>>>>>>> Stashed changes
 =======
 						`${data.title} / ${$WEBUI_NAME}`,
 >>>>>>> Stashed changes
@@ -567,7 +571,11 @@
 						if ($settings?.notificationEnabled ?? false) {
 							notify(
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 								`${displayTitle} / Open WebUI`,
+=======
+								`${displayTitle} / ${$WEBUI_NAME}`,
+>>>>>>> Stashed changes
 =======
 								`${displayTitle} / ${$WEBUI_NAME}`,
 >>>>>>> Stashed changes
@@ -719,7 +727,11 @@
 						// https://docs.openwebui.com/license.
 						notify(
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 							`${title} / Open WebUI`,
+=======
+							`${title} / ${$WEBUI_NAME}`,
+>>>>>>> Stashed changes
 =======
 							`${title} / ${$WEBUI_NAME}`,
 >>>>>>> Stashed changes

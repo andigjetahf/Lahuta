@@ -24,7 +24,11 @@ def version_callback(value: bool) -> None:
         # Do not alter, remove, obscure, or replace it except as LICENSE permits:
         # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         typer.echo(f'Open WebUI version: {VERSION}')
+=======
+        typer.echo(f'{WEBUI_NAME} version: {VERSION} (Bërthama: Open WebUI)')
+>>>>>>> Stashed changes
 =======
         typer.echo(f'{WEBUI_NAME} version: {VERSION} (Bërthama: Open WebUI)')
 >>>>>>> Stashed changes

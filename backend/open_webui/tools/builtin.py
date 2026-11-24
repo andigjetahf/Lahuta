@@ -155,7 +155,11 @@ async def notify(
     # Do not alter, remove, obscure, or replace it except as LICENSE permits:
     # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     app_name = getattr(app_name, 'WEBUI_NAME', 'Open WebUI')
+=======
+    app_name = getattr(app_name, 'WEBUI_NAME', 'Lahuta')
+>>>>>>> Stashed changes
 =======
     app_name = getattr(app_name, 'WEBUI_NAME', 'Lahuta')
 >>>>>>> Stashed changes

@@ -583,7 +583,11 @@ async def get_oauth_client_info_with_dynamic_client_registration(
             # Do not alter, remove, obscure, or replace it except as LICENSE permits:
             # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             client_name='Open WebUI',
+=======
+            client_name='Lahuta',
+>>>>>>> Stashed changes
 =======
             client_name='Lahuta',
 >>>>>>> Stashed changes

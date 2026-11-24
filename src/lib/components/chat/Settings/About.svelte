@@ -180,6 +180,10 @@
 					>{$i18n.t('All rights reserved.')}</a
 				>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+				<span class="block mt-0.5 text-gray-500 dark:text-gray-400 font-medium">Lahuta — {$i18n.t('E ndërtuar mbi bërthamën Open WebUI')}</span>
+>>>>>>> Stashed changes
 =======
 				<span class="block mt-0.5 text-gray-500 dark:text-gray-400 font-medium">Lahuta — {$i18n.t('E ndërtuar mbi bërthamën Open WebUI')}</span>
 >>>>>>> Stashed changes

@@ -626,7 +626,11 @@ async def speech(request: Request, user=Depends(get_verified_user)):
             raise HTTPException(
                 status_code=r.status if r else 500,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 detail=detail if detail else 'Open WebUI: Server Connection Error',
+=======
+                detail=detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
+>>>>>>> Stashed changes
 =======
                 detail=detail if detail else ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
 >>>>>>> Stashed changes
@@ -895,7 +899,11 @@ async def get_models(request: Request, url_idx: int | None = None, user=Depends(
                 # Do not alter, remove, obscure, or replace it except as LICENSE permits:
                 # https://docs.openwebui.com/license.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 raise HTTPException(status_code=500, detail='Open WebUI: Server Connection Error')
+=======
+                raise HTTPException(status_code=500, detail=ERROR_MESSAGES.SERVER_CONNECTION_ERROR)
+>>>>>>> Stashed changes
 =======
                 raise HTTPException(status_code=500, detail=ERROR_MESSAGES.SERVER_CONNECTION_ERROR)
 >>>>>>> Stashed changes
@@ -2110,7 +2118,11 @@ async def proxy(path: str, request: Request, user=Depends(get_verified_user)):
         raise HTTPException(
             status_code=r.status if r else 500,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             detail='Open WebUI: Server Connection Error',
+=======
+            detail=ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
+>>>>>>> Stashed changes
 =======
             detail=ERROR_MESSAGES.SERVER_CONNECTION_ERROR,
 >>>>>>> Stashed changes
