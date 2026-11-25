@@ -354,15 +354,7 @@ if LOG_FORMAT != 'json':
  ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝     ╚══╝╚══╝ ╚══════╝╚═════╝  ╚═════╝ ╚═╝
 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-v{VERSION} - building the best AI user interface.
-=======
 v{VERSION} - Lahuta (Bërthama: Open WebUI)
->>>>>>> Stashed changes
-=======
-v{VERSION} - Lahuta (Bërthama: Open WebUI)
->>>>>>> Stashed changes
 {f'Commit: {WEBUI_BUILD_HASH}' if WEBUI_BUILD_HASH != 'dev-build' else ''}
 https://github.com/open-webui/open-webui
 """
@@ -373,15 +365,7 @@ https://github.com/open-webui/open-webui
         # LICENSE covers this Open WebUI CLI identifier.
         # Do not alter, remove, obscure, or replace it except as LICENSE permits:
         # https://docs.openwebui.com/license.
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        print(f'Open WebUI v{VERSION} - building the best AI user interface.\nhttps://github.com/open-webui/open-webui')
-=======
         print(f'{WEBUI_NAME} v{VERSION} (Bërthama: Open WebUI)\nhttps://github.com/open-webui/open-webui')
->>>>>>> Stashed changes
-=======
-        print(f'{WEBUI_NAME} v{VERSION} (Bërthama: Open WebUI)\nhttps://github.com/open-webui/open-webui')
->>>>>>> Stashed changes
 
 
 @asynccontextmanager
@@ -568,15 +552,7 @@ apply_orjson_http_json()
 # Do not alter, remove, obscure, or replace it except as LICENSE permits:
 # https://docs.openwebui.com/license.
 app = FastAPI(
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    title='Open WebUI',
-=======
     title=WEBUI_NAME,
->>>>>>> Stashed changes
-=======
-    title=WEBUI_NAME,
->>>>>>> Stashed changes
     docs_url='/docs' if ENV == 'dev' else None,
     openapi_url='/openapi.json' if ENV == 'dev' else None,
     redoc_url=None,

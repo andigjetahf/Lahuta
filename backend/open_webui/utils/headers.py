@@ -190,15 +190,7 @@ async def get_headers_and_cookies(
                 # Do not alter, remove, obscure, or replace it except as LICENSE permits:
                 # https://docs.openwebui.com/license.
                 'HTTP-Referer': 'https://openwebui.com/',
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                'X-Title': 'Open WebUI',
-=======
                 'X-Title': 'Lahuta',
->>>>>>> Stashed changes
-=======
-                'X-Title': 'Lahuta',
->>>>>>> Stashed changes
             }
             if 'openrouter.ai' in url
             else {}

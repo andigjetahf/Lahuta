@@ -257,15 +257,7 @@ async def load_challenge(token: str, kinds: set[str], *, attempt: bool = False):
 
 
 def setup_details(secret: str, email: str) -> dict:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    uri = pyotp.TOTP(secret).provisioning_uri(name=email, issuer_name='Open WebUI')
-=======
     uri = pyotp.TOTP(secret).provisioning_uri(name=email, issuer_name='Lahuta')
->>>>>>> Stashed changes
-=======
-    uri = pyotp.TOTP(secret).provisioning_uri(name=email, issuer_name='Lahuta')
->>>>>>> Stashed changes
     buffer = io.BytesIO()
     qrcode.make(uri, image_factory=qrcode.image.svg.SvgPathImage).save(buffer)
     return {

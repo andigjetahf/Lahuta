@@ -23,18 +23,8 @@ Me motor të integruar për **RAG (Retrieval Augmented Generation)**, kërkim n�
 ## ✨ Veçoritë Kryesore të Lahuta
 
 - 🇦🇱 **Lokalizim 100% në Gjuhën Shqipe**: E gjithë ndërfaqja, menytë, njoftimet dhe cilësimet janë të parazgjedhura në shqip (`sq-AL`), me përshtatje gjuhësore me cilësi të lartë.
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-- 🚀 **Instalim i Thjeshtë me Docker**: Nisje e menjëhershme përmes Docker ose Docker Compose me mbështetje për GPU (Nvidia CUDA) dhe CPU.
-- 🤝 **Integrim i Gjithanshëm me Modelet LLM**: Lidhuni lehtësisht me serverin lokal të **Ollama**, ose integroni shërbime si **OpenAI**, **Anthropic**, **Gemini**, **Groq**, **Mistral**, **OpenRouter**, **LMStudio** dhe të tjera.
-=======
 - 🚀 **Instalim i Thjeshtë me Docker**: Nisje e pavarur përmes Docker Compose vetëm për Lahutën (pa pasur nevojë të shkarkoni Ollama lokalisht, me mbështetje për servera të jashtëm Ollama).
 - 🤝 **Integrim i Gjithanshëm me Modelet LLM**: Lidhuni lehtësisht me serverin tuaj të **Ollama** në cilindo server tjetër në rrjet, ose integroni shërbime si **OpenAI**, **Anthropic**, **Gemini**, **Groq**, **Mistral**, **OpenRouter**, **LMStudio** dhe të tjera.
->>>>>>> Stashed changes
-=======
-- 🚀 **Instalim i Thjeshtë me Docker**: Nisje e pavarur përmes Docker Compose vetëm për Lahutën (pa pasur nevojë të shkarkoni Ollama lokalisht, me mbështetje për servera të jashtëm Ollama).
-- 🤝 **Integrim i Gjithanshëm me Modelet LLM**: Lidhuni lehtësisht me serverin tuaj të **Ollama** në cilindo server tjetër në rrjet, ose integroni shërbime si **OpenAI**, **Anthropic**, **Gemini**, **Groq**, **Mistral**, **OpenRouter**, **LMStudio** dhe të tjera.
->>>>>>> Stashed changes
 - 📚 **RAG Lokal i Avancuar**: Ngarkoni dokumente (PDF, Word, Excel, tekst) drejtpërdrejt në bisedë me komandën `#`. Mbështet 9 baza të dhënash vektoriale (ChromaDB, PGVector, Qdrant, Milvus, Elasticsearch, etj.).
 - 🔍 **Kërkim në Ueb për RAG**: Merrni të dhëna në kohë reale nga interneti duke përdorur SearXNG, Google PSE, Brave Search, DuckDuckGo, Tavily dhe ofrues të tjerë.
 - 🌐 **Shfletim Uebi në Bisedë**: Përfshini përmbajtje nga faqet e internetit direkt në diskutim duke vendosur `#` e ndjekur nga një lidhje uebi (URL).

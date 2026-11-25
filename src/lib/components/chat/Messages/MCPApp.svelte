@@ -15,14 +15,7 @@
 	import { getContext, onDestroy, onMount } from 'svelte';
 	import { AppBridge, PostMessageTransport } from '@modelcontextprotocol/ext-apps/app-bridge';
 	import { WEBUI_API_BASE_URL, WEBUI_VERSION } from '$lib/constants';
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 	import { WEBUI_NAME } from '$lib/stores';
->>>>>>> Stashed changes
-=======
-	import { WEBUI_NAME } from '$lib/stores';
->>>>>>> Stashed changes
 	import ConfirmDialog from '$lib/components/common/ConfirmDialog.svelte';
 	import Spinner from '$lib/components/common/Spinner.svelte';
 	import { injectCsp } from '$lib/utils/csp';
@@ -95,15 +88,7 @@
 		if (closing) return;
 		bridge = new AppBridge(
 			null,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-			{ name: 'Open WebUI', version: WEBUI_VERSION },
-=======
 			{ name: $WEBUI_NAME, version: WEBUI_VERSION },
->>>>>>> Stashed changes
-=======
-			{ name: $WEBUI_NAME, version: WEBUI_VERSION },
->>>>>>> Stashed changes
 			{
 				openLinks: {},
 				message: { text: {} },
